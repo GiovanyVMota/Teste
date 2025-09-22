@@ -1,0 +1,123 @@
+/* src/App.css */
+body {
+  font-family: Arial, sans-serif;
+  /* background-color: #0d0d0d; */ /* REMOVA ESTA LINHA */
+  color: #eee;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 0.5s ease-in-out;
+  /* A imagem de fundo será escurecida com um pseudo-elemento */
+}
+.background-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Camada escura para dar contraste */
+  transition: background-color 0.5s ease-in-out;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative; /* Mantém o conteúdo por cima da imagem */
+  z-index: 1;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 2.5em;
+  color: #f0e6d2;
+}
+
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 1em;
+  border-radius: 25px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: #eee;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: #888;
+}
+
+.search-input:focus {
+  border-color: #f0e6d2;
+  box-shadow: 0 0 8px #f0e6d2;
+}
+
+.champions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Aumentado de 180px para 200px */
+  gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch; /* Garante que todos os cards na mesma linha tenham a mesma altura */
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-weight: bold;
+  text-align: center;
+}
+
+.champion-link {
+  text-decoration: none;
+  color: inherit;
+}
+/* Adiciona uma transição suave para a opacidade e transformação nos links dos cards */
+.champion-link {
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Quando o mouse estiver sobre a grade de campeões... */
+.champions-grid:hover .champion-link {
+  opacity: 0.1; /* ...todos os cards ficam com a opacidade bem baixa. */
+}
+
+/* E para o card específico em que o mouse está em cima... */
+.champions-grid .champion-link:hover {
+  opacity: 1; /* ...a opacidade volta a ser 100%. */
+  transform: scale(1.05); /* Opcional: aumenta um pouco o tamanho para dar mais destaque. */
+}

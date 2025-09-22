@@ -1,0 +1,60 @@
+/* src/components/Header.css */
+
+.header {
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
+  gap: 20px;
+  text-align: center;
+}
+
+.main-title {
+  font-size: 2.5em;
+  color: #f0e6d2;
+  margin: 0;
+  flex-grow: 1; /* Permite que o título ocupe o espaço disponível */
+  text-align: left;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-email {
+  color: #ccc;
+  font-size: 0.9em;
+}
+
+.auth-button {
+  text-decoration: none;
+  background-color: #f0e6d2;
+  color: #1a1a1a;
+  padding: 8px 18px;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s, color 0.2s;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  display: inline-block; /* Necessário para que o Link se comporte como botão */
+}
+
+.auth-button:hover {
+  background-color: #e0d0b4;
+}
+
+/* Responsividade para o cabeçalho */
+@media (max-width: 768px) {
+  .header-content {
+    flex-direction: column;
+    justify-content: center;
+  }
+}

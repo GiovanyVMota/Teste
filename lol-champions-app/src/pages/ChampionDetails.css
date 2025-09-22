@@ -1,0 +1,122 @@
+/* src/pages/ChampionDetails.css */
+
+.details-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  color: #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+  padding: 8px 15px;
+  background-color: #f0e6d2;
+  color: #1a1a1a;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #e0d0b4;
+}
+
+.champion-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.champion-name {
+  font-size: 3em;
+  color: #f0e6d2;
+  margin-bottom: 5px;
+}
+
+.champion-title {
+  font-size: 1.5em;
+  color: #aaa;
+  font-style: italic;
+  margin-top: 0;
+}
+
+.champion-splash {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.champion-info-section {
+  margin-top: 30px;
+}
+
+.champion-info-section h3 {
+  font-size: 1.8em;
+  color: #f0e6d2;
+  border-bottom: 2px solid #333;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.champion-lore {
+  line-height: 1.6;
+}
+
+.abilities-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ability-card {
+  display: flex;
+  align-items: flex-start;
+  background-color: #222;
+  padding: 15px;
+  border-radius: 8px;
+  gap: 15px;
+}
+
+.ability-card img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 2px solid #444;
+}
+
+.ability-text h4 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #f0e6d2;
+}
+
+.ability-text p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+.stats-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.stats-list li {
+  background-color: #222;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+@media (max-width: 600px) {
+  .stats-list {
+    grid-template-columns: 1fr; /* Muda para uma coluna em telas menores */
+  }
+}
