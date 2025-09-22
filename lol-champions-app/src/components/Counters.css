@@ -1,0 +1,19 @@
+.counters-container {
+  background-color: rgba(10, 10, 20, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #c8aa6e44;
+}
+
+.counter-item {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #333;
+}
+.counter-item:last-child {
+  border-bottom: none;
+}
+.counter-item h4 {
+  margin: 0 0 5px 0;
+  color: #c8aa6e;
+}

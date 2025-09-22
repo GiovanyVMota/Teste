@@ -1,23 +1,26 @@
 import { useState } from "react";
 
 export default function ChampionSelector({ onChange }) {
-  const [championId, setChampionId] = useState("");
+  // Mudado de championId para championName
+  const [championName, setChampionName] = useState("");
   const [region, setRegion] = useState("");
 
   const regions = ["BR1","NA1","EUW1","EUN1","KR","JP1","LA1","LA2","TR1","RU","OC1"];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (championId) onChange(championId, region);
+    // Envia o nome do campeão
+    if (championName) onChange(championName, region);
   };
 
   return (
     <form onSubmit={handleSubmit} style={{ marginBottom: "20px" }}>
       <input
-        type="number"
-        placeholder="Champion ID"
-        value={championId}
-        onChange={(e) => setChampionId(e.target.value)}
+        // Mudado type para "text" e placeholder
+        type="text"
+        placeholder="Nome do Campeão"
+        value={championName}
+        onChange={(e) => setChampionName(e.target.value)}
         style={{ marginRight: "10px" }}
       />
       <select value={region} onChange={(e) => setRegion(e.target.value)} style={{ marginRight: "10px" }}>

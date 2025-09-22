@@ -1,0 +1,26 @@
+.builds-container {
+  background-color: rgba(10, 10, 20, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #c8aa6e44;
+}
+
+.build-card {
+  border-left: 3px solid #555;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #1a1a2e;
+}
+
+.build-card.win {
+  border-left-color: #4caf50;
+}
+
+.build-card.loss {
+  border-left-color: #f44336;
+}
+
+.build-result {
+  font-weight: bold;
+  margin-top: 0;
+}

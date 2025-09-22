@@ -1,16 +1,29 @@
-export default function Counters({ counters }) {
-  if (!counters || counters.length === 0) return <p>Nenhum counter encontrado.</p>;
+// src/components/Counters.jsx
+import React from 'react';
+import './Counters.css';
+
+const Counters = ({ counters }) => {
+    // VERIFICAÇÃO PRINCIPAL
+  if (!counters || counters.length === 0) {
+      return (
+        <div className="counters-container">
+            <h3>Dicas de Counter</h3>
+            <p>Nenhuma dica de counter encontrada.</p>
+        </div>
+      );
+  }
 
   return (
-    <div>
-      <h2>Counters</h2>
-      {counters.counters.map((c, i) => (
-        <div key={i} style={{ border: "1px solid #ccc", padding: "10px", marginBottom: "10px" }}>
-          <p>Campeão ID: {c.championId}</p>
-          <p>Região: {c.region}</p>
-          <p>Winrate contra: {c.winrate}%</p>
+    <div className="counters-container">
+      <h3>Dicas de Counter</h3>
+      {counters.map(c => (
+        <div key={c.champion} className="counter-item">
+          <h4>{c.champion}</h4>
+          <p>{c.description}</p>
         </div>
       ))}
     </div>
   );
-}
+};
+
+export default Counters;

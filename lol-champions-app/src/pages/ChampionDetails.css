@@ -119,4 +119,25 @@
   .stats-list {
     grid-template-columns: 1fr; /* Muda para uma coluna em telas menores */
   }
+  /* Adicionar ao final do arquivo src/pages/ChampionDetails.css */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.dashboard-column {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Para telas menores */
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
 }

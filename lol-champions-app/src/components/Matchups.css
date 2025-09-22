@@ -1,0 +1,29 @@
+.matchups-container {
+  background-color: rgba(10, 10, 20, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #c8aa6e44;
+}
+
+.matchup-columns {
+  display: flex;
+  gap: 20px;
+}
+
+.matchup-column {
+  flex: 1;
+}
+
+.matchup-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.matchup-column li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.good { color: #4caf50; }
+.bad { color: #f44336; }

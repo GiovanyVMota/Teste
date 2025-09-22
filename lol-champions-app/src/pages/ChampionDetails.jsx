@@ -1,40 +1,76 @@
 // src/pages/ChampionDetails.jsx
-
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 import './ChampionDetails.css';
 
+// Importe os novos componentes
+import Builds from '../components/Builds';
+import Matchups from '../components/Matchups';
+import Counters from '../components/Counters';
+// NOTA: Removi o import do BackgroundContext, pois seu código original não o usava aqui.
+// Se você precisar dele, pode adicionar novamente.
+
 const ChampionDetails = () => {
   const { championId } = useParams();
   const [champion, setChampion] = useState(null);
+  
+  // Estados para os novos dados
+  const [builds, setBuilds] = useState(null);
+  const [matchups, setMatchups] = useState(null);
+  const [counters, setCounters] = useState(null);
+
+  // Um único estado de loading para todos os dados
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const apiVersion = '14.1.1';
-  const apiUrl = `https://ddragon.leagueoflegends.com/cdn/${apiVersion}/data/pt_BR/champion/${championId}.json`;
 
   useEffect(() => {
-    const fetchChampionDetails = async () => {
+    const fetchAllData = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        setLoading(true);
-        const response = await axios.get(apiUrl);
-        const championData = Object.values(response.data.data)[0];
-        setChampion(championData);
-        setError(null);
+        // Todas as chamadas de API são disparadas em paralelo
+        const ddragonUrl = `https://ddragon.leagueoflegends.com/cdn/${apiVersion}/data/pt_BR/champion/${championId}.json`;
+        
+        const championDetailsPromise = axios.get(ddragonUrl);
+        const buildsPromise = axios.get(`/api/champion/${championId}/builds`);
+        const matchupsPromise = axios.get(`/api/champion/${championId}/matchups`);
+        const countersPromise = axios.get(`/api/champion/${championId}/counters`);
+
+        const [
+            ddragonResponse,
+            buildsResponse,
+            matchupsResponse,
+            countersResponse
+        ] = await Promise.all([
+            ddragonPromise,
+            buildsPromise,
+            matchupsPromise,
+            countersPromise
+        ]);
+
+        // Atualiza todos os estados com os dados recebidos
+        setChampion(Object.values(ddragonResponse.data.data)[0]);
+        setBuilds(buildsResponse.data);
+        setMatchups(matchupsResponse.data);
+        setCounters(countersResponse.data);
+
       } catch (err) {
-        setError("Não foi possível carregar os detalhes do campeão.");
-        setChampion(null);
+        console.error("Erro ao buscar dados do campeão:", err);
+        setError(`Não foi possível carregar os dados para ${championId}. Verifique se o backend está rodando.`);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchChampionDetails();
-  }, [championId]);
+    fetchAllData();
+  }, [championId]); // A busca é refeita sempre que o championId mudar na URL
 
   if (loading) {
-    return <div className="details-container"><p>Carregando detalhes...</p></div>;
+    return <div className="details-container"><p>Carregando dashboard do {championId}...</p></div>;
   }
 
   if (error) {
@@ -42,6 +78,7 @@ const ChampionDetails = () => {
   }
 
   if (!champion) {
+    // Se, mesmo após o loading, não houver dados do campeão, não renderiza nada
     return null;
   }
 
@@ -59,6 +96,21 @@ const ChampionDetails = () => {
         />
       </div>
 
+      {/* NOVA SEÇÃO DE DASHBOARD */}
+      <div className="champion-info-section">
+          <h3>Dashboard de Estratégia</h3>
+          <div className="dashboard-grid">
+              <div className="dashboard-column">
+                  <Builds builds={builds} />
+              </div>
+              <div className="dashboard-column">
+                  <Matchups matchups={matchups} />
+                  <Counters counters={counters} />
+              </div>
+          </div>
+      </div>
+      
+      {/* SEÇÕES ORIGINAIS QUE VOCÊ JÁ TINHA */}
       <div className="champion-info-section">
         <h3>História</h3>
         <p className="champion-lore">{champion.lore}</p>
@@ -75,7 +127,8 @@ const ChampionDetails = () => {
               />
               <div className="ability-text">
                 <h4>{spell.name}</h4>
-                <p>{spell.description}</p>
+                {/* Usar dangerouslySetInnerHTML é ok aqui, pois a API é confiável */}
+                <p dangerouslySetInnerHTML={{ __html: spell.description }}></p>
               </div>
             </div>
           ))}
@@ -91,7 +144,6 @@ const ChampionDetails = () => {
           <li>Dificuldade: {champion.info.difficulty}</li>
         </ul>
       </div>
-
     </div>
   );
 };
